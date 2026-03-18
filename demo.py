@@ -22,7 +22,7 @@ torch.manual_seed(0)
 def _prepare_input_data(batch_size: int) -> torch.Tensor:
     identity_coeffs = 0.8 * torch.randn(batch_size, 45).cpu()
     model_parameters = 0.2 * (torch.rand(batch_size, 204) - 0.5).cpu()
-    face_expr_coeffs = 0.4 * torch.randn(batch_size, 72).cpu()
+    face_expr_coeffs = 0.1 * torch.randn(batch_size, 72).cpu()
     return identity_coeffs, model_parameters, face_expr_coeffs
 
 def run():
