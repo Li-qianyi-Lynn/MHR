@@ -58,7 +58,7 @@ def run():
     batch_size = 2
     """update the expression coefficients"""
     expr = torch.zeros(batch_size, 72)
-    expr[:, 0] = 0.8  # 例如：把第0维表情系数拉高（对应哪个表情名需用 dump 脚本查）
+    expr[:, 24] = 0.8  # 例如：把第0维表情系数拉高（对应哪个表情名需用 dump 脚本查）
 
     identity_coeffs, model_parameters, face_expr_coeffs = _prepare_input_data(batch_size, face_expr_coeffs=expr)
 
