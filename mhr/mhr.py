@@ -188,6 +188,33 @@ class MHR(torch.nn.Module):
 
         return NUM_FACE_EXPRESSION_BLENDSHAPES
 
+    """ lynn: helper functions for getting the names  """
+    def get_face_expression_names(self) -> list[str]:
+        """
+        Return the ordered list of face expression parameter names.
+
+        The returned list length is `NUM_FACE_EXPRESSION_BLENDSHAPES` and matches
+        the order expected by `face_expr_coeffs` (i.e. the last 72 blendshape
+        coefficients in the character parameterization).
+        """
+
+        names = list(self.character.parameter_transform.names)
+        return names[-self.get_num_face_expression_blendshapes() :]
+
+    def get_identity_blendshape_names(self) -> list[str]:
+        """
+        Return the ordered list of identity blendshape parameter names.
+
+        The returned list length is `NUM_IDENTITY_BLENDSHAPES` and matches the
+        order expected by `identity_coeffs`.
+        """
+
+        names = list(self.character.parameter_transform.names)
+        n_shapes = self.get_num_identity_blendshapes() + self.get_num_face_expression_blendshapes()
+        start = -n_shapes
+        end = start + self.get_num_identity_blendshapes()
+        return names[start:end]
+
     def forward(
         self,
         identity_coeffs: torch.Tensor,
